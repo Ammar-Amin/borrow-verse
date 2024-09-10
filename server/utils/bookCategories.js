@@ -1,0 +1,16 @@
+export const bookCategories = {
+    FICTION: 'Fiction',
+    FANTASY: 'Fantasy',
+    MYSTERY: 'Mystery',
+    BIOGRAPHY: 'Biography',
+    HISTORY: 'History',
+    ROMANCE: 'Romance',
+    SELF_HELP: 'Self-Help',
+    THRILLER: 'Thriller',
+    HORROR: 'Horror',
+    CHILDRENS: 'Children’s',
+    EDUCATIONAL: 'Educational',
+    POETRY: 'Poetry',
+    RELIGION: 'Religion',
+    BUSINESS: 'Business',
+};

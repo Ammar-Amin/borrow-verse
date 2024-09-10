@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { bookCategories } from "../utils/bookCategories.js";
 
 const bookSchema = new mongoose.Schema({
     title: {
@@ -14,7 +15,8 @@ const bookSchema = new mongoose.Schema({
         required: true
     },
     category: {
-        type: String,
+        type: [String],  // Array of strings
+        enum: Object.values(bookCategories),  // Restrict values to enum
         required: true
     },
     rentPerDay: {
