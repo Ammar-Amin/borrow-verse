@@ -3,17 +3,17 @@ import { ApiError, ApiResponse, AsyncHandler } from "../utils/index.js";
 
 
 export const register = AsyncHandler(async (req, res) => {
-    const { name, email, password } = req.body;
+    const { name, email, password, phone, address } = req.body;
 
     const user = await User.findOne({ email });
     if (user) {
         throw new ApiError(400, "User already exists");
     }
 
-    const newUser = await User.create({ name, email, password });
+    const newUser = await User.create({ name, email, password, phone, address });
     await newUser.save();
     res.status(200).json(
-        new ApiResponse(200, newUser, "User created successfully")
+        new ApiResponse(200, "User created successfully")
     );
 })
 

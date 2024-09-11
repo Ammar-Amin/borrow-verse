@@ -31,12 +31,13 @@ mongoose.connection.on("disconnected", () => {
 import authRoutes from './routes/auth.route.js'
 import userRoutes from './routes/user.route.js'
 import bookRoutes from './routes/book.route.js'
+import transactionRoutes from './routes/transaction.route.js'
 
 // ROUTES DECLARATION 
 app.use('/api/auth', authRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/book', bookRoutes)
-
+app.use('/api/transaction', transactionRoutes)
 
 // ERROR HANDLING
 app.use((error, req, res, next) => {

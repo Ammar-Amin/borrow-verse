@@ -1,9 +1,10 @@
 export const bookCategories = {
     FICTION: 'Fiction',
     FANTASY: 'Fantasy',
+    ADVENTURE: 'Adventure',
     MYSTERY: 'Mystery',
     BIOGRAPHY: 'Biography',
-    HISTORY: 'History',
+    HISTORICAL: 'Historical',
     ROMANCE: 'Romance',
     SELF_HELP: 'Self-Help',
     THRILLER: 'Thriller',

@@ -4,9 +4,14 @@ import { bookCategories } from "../utils/bookCategories.js";
 const bookSchema = new mongoose.Schema({
     title: {
         type: String,
+        unique: true,
         required: true
     },
     description: {
+        type: String,
+        required: true
+    },
+    author: {
         type: String,
         required: true
     },
@@ -17,6 +22,10 @@ const bookSchema = new mongoose.Schema({
     category: {
         type: [String],  // Array of strings
         enum: Object.values(bookCategories),  // Restrict values to enum
+        required: true
+    },
+    pages: {
+        type: Number,
         required: true
     },
     rentPerDay: {
