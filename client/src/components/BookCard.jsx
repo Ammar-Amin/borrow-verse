@@ -12,7 +12,7 @@ const BookCard = ({ book }) => {
             <div className="p-2 lg:p-4">
                 <h1 className="inline-flex items-center text-sm lg:text-lg font-semibold">
                     {book.title} {" "}
-                    <Link to={`/book/${book._id}`}>
+                    <Link to={`/books/${book._id}`}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
@@ -48,7 +48,7 @@ const BookCard = ({ book }) => {
                         ))
                     }
                 </div>
-                <Link to={`/book/${book._id}`}>
+                <Link to={`/books/${book._id}`}>
                     <button className="text-xs lg:text-sm py-1 px-3 bg-blue-600 rounded-md">
                         View Details
                     </button>
