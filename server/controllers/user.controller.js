@@ -2,8 +2,9 @@ import User from "../models/user.model.js";
 import { ApiResponse, AsyncHandler } from "../utils/index.js";
 
 export const currentUser = AsyncHandler(async (req, res) => {
+    const { password: pass, ...rest } = req.user._doc
     res.status(200).json(
-        new ApiResponse(200, req.user, "User retrieved successfully")
+        new ApiResponse(200, rest, "User retrieved successfully")
     )
 })
 

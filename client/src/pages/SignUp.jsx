@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import axios from 'axios'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
@@ -24,14 +25,19 @@ const SignUp = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         setLoading(true)
-        console.log(formData)
+        setError(null)
+        // console.log(formData)
         try {
             const res = await axios.post('/api/auth/register', formData)
-            console.log(res.data)
-            navigate('/login')
+            // console.log(res.data)
+            if (res.data.success) {
+                setLoading(false)
+                navigate('/login')
+            }
         } catch (error) {
-            console.log(error)
-            // setError(error)
+            // console.log(error.response.data.message)
+            setError(error.response.data.message)
+            setLoading(false)
         }
 
     }
@@ -45,12 +51,14 @@ const SignUp = () => {
                     <Input
                         name='name'
                         placeholder="Full Name"
+                        required
                         value={formData.name}
                         onChange={handleChange}
                     />
                     <Input
                         name='email'
                         placeholder="Email"
+                        required
                         value={formData.email}
                         onChange={handleChange}
                     />
@@ -58,22 +66,27 @@ const SignUp = () => {
                         name='password'
                         type="password"
                         placeholder="Password"
+                        required
                         value={formData.password}
                         onChange={handleChange}
                     />
                     <Input
                         name='phone'
                         type="number"
+                        max="9999999999"
                         placeholder="Phone Number"
+                        required
                         value={formData.phone}
                         onChange={handleChange}
                     />
                     <Textarea
                         name='address'
                         placeholder="Your Address"
+                        required
                         value={formData.address}
                         onChange={handleChange}
                     />
+                    {error && <p className='text-center text-red-500'>{error}</p>}
                     <Button className="w-full" disabled={loading}>
                         {loading ? "Loading..." : "Sign Up"}
                     </Button>

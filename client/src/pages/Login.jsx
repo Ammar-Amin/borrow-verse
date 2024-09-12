@@ -1,6 +1,9 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { login } from '@/store/slice/authSlice'
+import axios from 'axios'
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 
 const Login = () => {
@@ -11,6 +14,7 @@ const Login = () => {
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(false)
 
+    const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const handleChange = (e) => {
@@ -20,14 +24,18 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         setLoading(true)
-        console.log(formData)
+        setError(null)
         try {
             const res = await axios.post('/api/auth/login', formData)
-            console.log(res.data)
-            navigate('/')
+
+            if (res.data.success) {
+                dispatch(login(res.data.data))
+                setLoading(false)
+                navigate('/')
+            }
         } catch (error) {
-            console.log(error)
-            // setError(error)
+            setError(error.response.data.message)
+            setLoading(false)
         }
 
     }
@@ -51,6 +59,7 @@ const Login = () => {
                         value={formData.password}
                         onChange={handleChange}
                     />
+                    {error && <p className='text-center text-red-500'>{error}</p>}
                     <Button className="w-full" disabled={loading}>
                         {loading ? "Loading..." : "Log In"}
                     </Button>

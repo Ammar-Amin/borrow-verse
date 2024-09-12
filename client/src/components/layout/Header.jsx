@@ -12,22 +12,24 @@ import {
     SheetTrigger,
 } from "@/components/ui/sheet"
 import { RiMenu2Fill } from "react-icons/ri";
+import useGetCurrUser from '@/hooks/useGetCurrUser'
 
 
 const Header = () => {
 
-    const { status, user } = useSelector(state => state.auth)
+    const { user } = useGetCurrUser()
+    const { status } = useSelector(state => state.auth)
 
     const leftNav = [
         {
             name: 'Home',
             path: '/',
-            active: !status
+            active: true
         },
         {
             name: 'Books',
             path: '/books',
-            active: !status
+            active: true
         },
         {
             name: 'Create Book',

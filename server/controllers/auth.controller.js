@@ -35,11 +35,13 @@ export const login = AsyncHandler(async (req, res) => {
         throw new ApiError(500, "Failed to generate token");
     }
 
+    const { password: pass, ...rest } = user._doc;
+
     res
         .cookie('jwt_token', token, { httpOnly: true })
         .status(200)
         .json(
-            new ApiResponse(200, user, "Logged in successfully")
+            new ApiResponse(200, rest, "Logged in successfully")
         )
 })
 
