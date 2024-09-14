@@ -3,6 +3,10 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
+import path from 'path';
+
+const __dirname = path.resolve();
+
 
 const app = express();
 dotenv.config();
@@ -38,6 +42,14 @@ app.use('/api/auth', authRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/book', bookRoutes)
 app.use('/api/transaction', transactionRoutes)
+
+
+// STATIC FILES
+app.use(express.static(path.join(__dirname, '/client/dist')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+})
 
 // ERROR HANDLING
 app.use((error, req, res, next) => {
