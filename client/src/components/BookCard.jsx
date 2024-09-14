@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const BookCard = ({ book }) => {
+const BookCard = ({ book, remove = "", rent = "" }) => {
     return (
         <div className="w-[150px] lg:w-[230px] h-[] rounded-md border">
             <img
@@ -10,9 +10,9 @@ const BookCard = ({ book }) => {
                 className="h-[200px] bg-blue-300 w-full object-contain rounded-t-md px-4"
             />
             <div className="p-2 lg:p-4">
-                <h1 className="inline-flex items-center text-sm lg:text-lg font-semibold">
-                    {book.title} {" "}
-                    <Link to={`/books/${book._id}`}>
+                <Link to={`/books/${book._id}`}>
+                    <h1 className="inline-flex items-center text-sm lg:text-lg font-semibold">
+                        {book.title} {" "}
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
@@ -26,8 +26,8 @@ const BookCard = ({ book }) => {
                             <line x1="7" y1="17" x2="17" y2="7"></line>
                             <polyline points="7 7 17 7 17 17"></polyline>
                         </svg>
-                    </Link>
-                </h1>
+                    </h1>
+                </Link>
                 <div className="my-2 text-xs lg:text-sm flex flex-col gap-1">
                     <span>
                         Author : {book.author}
@@ -48,11 +48,17 @@ const BookCard = ({ book }) => {
                         ))
                     }
                 </div>
-                <Link to={`/books/${book._id}`}>
-                    <button className="text-xs lg:text-sm py-1 px-3 bg-blue-600 rounded-md">
-                        View Details
-                    </button>
-                </Link>
+                {remove
+                    ? <button onClick={() => remove(book._id)} className="mt-1 ml-1 text-xs lg:text-sm py-1 px-3 bg-red-600 rounded-md" >Remove</button>
+                    : <Link to={`/books/${book._id}`}>
+                        <button className="text-xs lg:text-sm py-1 px-3 bg-blue-600 rounded-md">
+                            View Details
+                        </button>
+                    </Link>
+                }
+                {rent && <button className="text-xs m-1 lg:text-sm py-1 px-3 bg-blue-600 rounded-md" onClick={() => rent(book._id)}>
+                    Confirm Rent
+                </button>}
             </div>
         </div>
     )

@@ -1,10 +1,10 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Navigate } from 'react-router-dom'
+import { Navigate, Outlet } from 'react-router-dom'
 
-const LoginProtected = ({ children }) => {
+const LoginProtected = () => {
     const { user } = useSelector(state => state.auth)
-    return user ? <Navigate to='/' /> : children
+    return user ? <Navigate to='/' /> : <Outlet />
 }
 
 export default LoginProtected

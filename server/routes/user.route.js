@@ -10,4 +10,4 @@ router.delete("/", verifyUser, deleteUser)
 
 router.get("/all", verifyUser, verifyAdmin, allUsers)
 
-export default router
+export default router   

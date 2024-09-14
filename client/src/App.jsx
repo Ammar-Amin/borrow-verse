@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { Layout } from "./components"
-import { Books, Error, Home, Login, Profile, SignUp, SingleBook } from "./pages"
+import { Books, Cart, Error, Home, Login, Profile, ReadList, SignUp, SingleBook } from "./pages"
 import { LoginProtected, UserProtected } from "./providers"
 
 
@@ -22,6 +22,8 @@ function App() {
 
           <Route element={<UserProtected />}>
             <Route path='/profile' element={<Profile />} />
+            <Route path='/read-list' element={<ReadList />} />
+            <Route path='/cart' element={<Cart />} />
           </Route>
 
           <Route path='*' element={<Error />} />

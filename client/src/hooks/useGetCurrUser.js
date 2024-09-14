@@ -21,7 +21,8 @@ export default function useGetCurrUser() {
                 setIsLoading(false)
             }
         } catch (error) {
-            setError(error.response.data.message)
+            console.error('Error fetching user data:', error)
+            setError(error.response.data.message || error.message)
             setIsLoading(false)
         }
     }

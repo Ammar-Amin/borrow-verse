@@ -13,11 +13,13 @@ import {
 } from "@/components/ui/sheet"
 import { RiMenu2Fill } from "react-icons/ri";
 import useGetCurrUser from '@/hooks/useGetCurrUser'
-
+import { FaShoppingCart } from "react-icons/fa";
+import { FaClipboardList } from "react-icons/fa";
+import { MdAccountCircle } from "react-icons/md";
 
 const Header = () => {
 
-    const { user } = useGetCurrUser()
+    const { user, isLoading, error } = useGetCurrUser()
     const { status } = useSelector(state => state.auth)
 
     const leftNav = [
@@ -45,17 +47,17 @@ const Header = () => {
 
     const rightNav = [
         {
-            name: 'Login',
+            name: <MdAccountCircle />,
             path: '/login',
             active: !status
         },
         {
-            name: 'Read List',
+            name: <FaClipboardList />,
             path: '/read-list',
             active: status
         },
         {
-            name: 'Cart',
+            name: <FaShoppingCart />,
             path: '/cart',
             active: status
         }
@@ -98,9 +100,9 @@ const Header = () => {
                 {/* MIDDLE NAV  */}
                 <Link to='/' className='text-xl lg:text-2xl'>{WEB_NAME}</Link>
                 {/* RIGHT NAV  */}
-                <div className='text-xs sm:text-sm lg:text-base space-x-4'>
+                <div className='text-xs sm:text-sm lg:text-base flex-center gap-1 md:gap-3'>
                     {rightNav.map((item, index) => (
-                        item.active && <Link key={index} to={item.path}>{item.name}</Link>
+                        item.active && <Link key={index} to={item.path} className={` ${item.path == '/login' ? 'text-lg md:text-xl' : ''}`}>{item.name}</Link>
                     ))}
                 </div>
             </nav>

@@ -5,7 +5,7 @@ import { ApiError, ApiResponse, AsyncHandler } from "../utils/index.js";
 
 export const issueTransaction = AsyncHandler(async (req, res) => {
     const { userId, bookId, issueDate } = req.body;
-    const user = await User.findOne({ userId });
+    const user = await User.findOne({ _id: userId });
     if (!user) {
         throw new ApiError(404, "User not found");
     }
