@@ -1,14 +1,18 @@
 import { BackToBooks, BookCard } from '@/components'
+import { toast } from '@/hooks/use-toast'
 import { removeBookFromCart } from '@/store/slice/cartSlice'
 import axios from 'axios'
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 const Cart = () => {
     const cart = useSelector(state => state.cart)
     const { user } = useSelector(state => state.auth)
     const dispatch = useDispatch()
-    console.log(user._id)
+
+    const [rentSuccess, setRentSuccess] = useState(false)
+
     const remove = (id) => {
         dispatch(removeBookFromCart(id))
     }
@@ -23,7 +27,10 @@ const Cart = () => {
                     issueDate: new Date()
                 }
             )
-            console.log(res)
+            // console.log(res)
+            setRentSuccess(true)
+            toast({ title: res.data.message })
+            remove(bookId)
         } catch (error) {
             console.log(error)
         }
@@ -42,8 +49,10 @@ const Cart = () => {
                             ))
                     }
                 </section>
+                {setRentSuccess && <p className='text-center underline text-green-600'>
+                    <Link to='/profile'>Check Your Profile</Link>
+                </p>}
                 {cart.length > 0 && <p className='text-center'>You total Rent would be {cart.reduce((acc, book) => acc + book.rentPerDay, 0)}rs per day</p>}
-                {/* <Button>Confirm</Button> */}
             </div>
         </main>
     )

@@ -1,8 +1,11 @@
 import { Button } from '@/components/ui/button'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 const Home = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
     return (
         <main className='w-full min-h-screen '>
             <div className='pt-16 lg:pt-20'>

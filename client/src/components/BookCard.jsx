@@ -57,7 +57,7 @@ const BookCard = ({ book, remove = "", rent = "" }) => {
                     </Link>
                 }
                 {rent && <button className="text-xs m-1 lg:text-sm py-1 px-3 bg-blue-600 rounded-md" onClick={() => rent(book._id)}>
-                    Confirm Rent
+                    Rent Now
                 </button>}
             </div>
         </div>

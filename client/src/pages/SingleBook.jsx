@@ -58,6 +58,7 @@ const SingleBook = () => {
     }
 
     useEffect(() => {
+        window.scrollTo(0, 0)
         const fetchBook = async () => {
             try {
                 let res = await axios.get('/api/book/' + id)
@@ -144,7 +145,7 @@ const SingleBook = () => {
                                                                     </AlertDialogFooter>
                                                                 </AlertDialogContent>
                                                             </AlertDialog>
-                                                            : <Button disable={!book.isAvailable}>{book.isAvailable ? "Rent Now" : "UnAvailable"}</Button>
+                                                            : <Button disable={!book.isAvailable}>{book.isAvailable ? "Add to Cart" : "UnAvailable"}</Button>
                                                         }
                                                     </TooltipTrigger>
                                                     <TooltipContent>

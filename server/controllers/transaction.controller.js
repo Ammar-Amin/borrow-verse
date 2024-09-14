@@ -42,7 +42,7 @@ export const returnTransaction = AsyncHandler(async (req, res) => {
     const rentPaid = daysRented * book.rentPerDay;
 
     transaction.returnDate = returnDate;
-    transaction.rentPaid = rentPaid;
+    transaction.rentAmount = rentPaid;
     transaction.status = 'RETURNED';
     await transaction.save();
 
@@ -54,7 +54,7 @@ export const returnTransaction = AsyncHandler(async (req, res) => {
 
 export const getUserTransactions = AsyncHandler(async (req, res) => {
     const transactions = await Transaction.find({ userId: req.user._id })
-        .populate('bookId', 'name category author image rentPerDay')
+        .populate('bookId', 'title category author image rentPerDay')
         .populate('userId', 'name email')
 
     if (!transactions.length) {

@@ -1,5 +1,4 @@
 import { BackToBooks, BookCard } from '@/components'
-import { toast } from '@/hooks/use-toast'
 import { removeBook } from '@/store/slice/readListSlice'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
